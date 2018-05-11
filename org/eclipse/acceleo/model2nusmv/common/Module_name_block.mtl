@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module Module_name_block('http:///smave.ecore')]
+
+[import org::eclipse::acceleo::model2nusmv::service::ModuleService]
+[import org::eclipse::acceleo::model2nusmv::service::VariablesService]
+[import org::eclipse::acceleo::model2nusmv::common::IVar_block]
+[template public Module_name_block(model : Model, operator : Operator)]
+MODULE [operator.name.toString()/][if (OperatorIs_Function(operator))]
+[Get_Function_Input_params(operator)/]
+[elseif (OperatorIs_Node(operator))]
+
+[IVar_block(model, operator)/]
+[/if]
+[/template]

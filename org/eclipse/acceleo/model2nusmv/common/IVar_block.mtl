@@ -1,0 +1,17 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module Var_nusmv.
+ */]
+[module IVar_block('http:///smave.ecore')]
+[import org::eclipse::acceleo::model2nusmv::service::VariablesService]
+
+[**
+ * The documentation of the template Var.
+ * @param aModel
+ */]
+[template public IVar_block(model : Model,operator : Operator)]
+IVAR
+	[for (input : Variable | Get_input_Variables(operator))]
+		[input.name.toString()/] := [Get_variable_type(model,input)/]
+	[/for]
+[/template]

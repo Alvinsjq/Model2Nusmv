@@ -1,0 +1,11 @@
+[comment encoding = UTF-8 /]
+[module Define_specical_block('http:///smave.ecore')]
+
+[import org::eclipse::acceleo::model2nusmv::service::VariablesService]
+[import org::eclipse::acceleo::model2nusmv::service::EquationService]
+
+[template public Define_specical_block(operator : Operator)]
+	[for (local : String | Get_All_Equations(operator))]
+		[local/] := rigexp;
+	[/for]
+[/template]

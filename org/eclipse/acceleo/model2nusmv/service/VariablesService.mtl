@@ -1,0 +1,63 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module VariablesService('http:///smave.ecore')/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_all_Variables(arg0 : Model) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_all_Variables(com.formaltech.smave.metamodel.smave.Model)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_all_Variables(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_all_Variables(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_input_Variables(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_input_Variables(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_hidden_Variables(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_hidden_Variables(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_output_Variables(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_output_Variables(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_Function_Input_params(arg0 : Operator) : String
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_Function_Input_params(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ * @param arg1
+ */]
+[query public Get_variable_type(arg0 : Model, arg1 : Variable) : String
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_variable_type(com.formaltech.smave.metamodel.smave.Model, com.formaltech.smave.metamodel.smave.Variable)', Sequence{arg0, arg1})
+/]
+

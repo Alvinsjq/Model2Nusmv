@@ -1,0 +1,23 @@
+[comment encoding = UTF-8 /]
+[module NuSMV_Main('http:///smave.ecore')/]
+[import org::eclipse::acceleo::model2nusmv::common::Module_name_block]
+[import org::eclipse::acceleo::model2nusmv::common::Var_block]
+[import org::eclipse::acceleo::model2nusmv::common::Define_block]
+[import org::eclipse::acceleo::model2nusmv::common::Assign_block]
+[import org::eclipse::acceleo::model2nusmv::common::Define_specical_block]
+[template public NuSMV_Main(model : Model)]
+	[comment 以Operator来分类，因此使用for来生成不同的SMV Models /]
+	[comment @main /]
+	[for (operator : Operator | model.eAllContents(Operator))]
+		[file (operator.name.toString()+('.smv'), false, 'UTF-8')]
+		[Module_name_block(model,operator)/]
+		[Var_block(model,operator)/]
+		[Define_block(model)/]
+		[Define_specical_block(operator)/]
+		[Assign_block(model,operator)/]
+		[/file]
+	[/for]
+[/template]
+ 
+
+

@@ -1,0 +1,11 @@
+[comment encoding = UTF-8 /]
+[module Define_block('http:///smave.ecore')]
+
+[import org::eclipse::acceleo::model2nusmv::service::ConstantsService]
+
+[template public Define_block(model : Model)]
+DEFINE
+	[for (const : Constant | model.eAllContents(Constant))]
+		[const.name.toString()/] := [Get_Constat_Value(const)/] ;
+	[/for]
+[/template]
