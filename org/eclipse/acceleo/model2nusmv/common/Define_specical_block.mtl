@@ -6,6 +6,6 @@
 
 [template public Define_specical_block(operator : Operator)]
 	[for (local : String | Get_All_Equations(operator))]
-		[local/] := rigexp;
+		[local/]
 	[/for]
 [/template]

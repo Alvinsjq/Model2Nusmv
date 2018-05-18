@@ -18,6 +18,7 @@ import com.formaltech.smave.metamodel.smave.Value;
 
 public class ConstantsService {
 
+
 	/**
 	 * 得到元模型中的所有常量
 	 * @param model
@@ -79,6 +80,8 @@ public class ConstantsService {
 	    }	 
 	    return returnString;
 	}
+
+
 
 	
 	

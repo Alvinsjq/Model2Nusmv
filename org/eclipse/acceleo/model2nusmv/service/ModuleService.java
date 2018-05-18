@@ -1,10 +1,16 @@
 package org.eclipse.acceleo.model2nusmv.service;
 
+import java.io.File;
+import java.util.List;
+
+import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.emf.ecore.EObject;
+
 import com.formaltech.smave.metamodel.smave.Operator;
 import com.formaltech.smave.metamodel.smave.OperatorKind;
 
 public class ModuleService {
-
+ 
 	/**
 	 * 判断是不是node
 	 * @param operator
@@ -30,6 +36,8 @@ public class ModuleService {
 		else 
 			return false;
 	}
+
+ 
 	
 	
 	

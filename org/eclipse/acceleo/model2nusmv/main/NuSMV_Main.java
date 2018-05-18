@@ -340,6 +340,9 @@ public class NuSMV_Main extends AbstractAcceleoGenerator {
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
+        if (!isInWorkspace(com.formaltech.smave.metamodel.smave.SmavePackage.class)) {
+            resourceSet.getPackageRegistry().put(com.formaltech.smave.metamodel.smave.SmavePackage.eINSTANCE.getNsURI(), com.formaltech.smave.metamodel.smave.SmavePackage.eINSTANCE);
+        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"

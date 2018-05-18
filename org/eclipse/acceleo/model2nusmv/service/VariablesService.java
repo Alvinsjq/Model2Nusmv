@@ -1,10 +1,12 @@
 package org.eclipse.acceleo.model2nusmv.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.acceleo.model2nusmv.tricks.TypesTrick;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EObject;
 
 import com.formaltech.smave.metamodel.smave.BasicType;
@@ -14,6 +16,7 @@ import com.formaltech.smave.metamodel.smave.Operator;
 import com.formaltech.smave.metamodel.smave.Variable;
 
 public class VariablesService {
+ 
 	/**
 	 * 
 	 * @param model 输入模型
@@ -170,4 +173,6 @@ public class VariablesService {
 		
 		return "other type";
 	}
+
+ 
 }

@@ -2,7 +2,7 @@
 [module Assign_block('http:///smave.ecore')]
 [import org::eclipse::acceleo::model2nusmv::service::ModuleService]
 [import org::eclipse::acceleo::model2nusmv::service::VariablesService]
-
+ 
 [template public Assign_block(model : Model, operator : Operator)]
 ASSIGN
 	[if (OperatorIs_Function(operator))]

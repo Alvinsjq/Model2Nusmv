@@ -12,3 +12,12 @@
 	= invoke('org.eclipse.acceleo.model2nusmv.service.EquationService', 'Get_All_Equations(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
 /]
 
+[**
+ * The documentation of the query
+ * @param arg0
+ * @param arg1
+ */]
+[query public IsOutputVariables(arg0 : String, arg1 : Operator) : Boolean
+	= invoke('org.eclipse.acceleo.model2nusmv.service.EquationService', 'IsOutputVariables(java.lang.String, com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0, arg1})
+/]
+

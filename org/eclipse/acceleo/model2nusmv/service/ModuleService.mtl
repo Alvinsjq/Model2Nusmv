@@ -1,10 +1,21 @@
 [comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
 [module ModuleService('http:///smave.ecore')/]
 
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
 [query public OperatorIs_Node(arg0 : Operator) : Boolean
 	= invoke('org.eclipse.acceleo.model2nusmv.service.ModuleService', 'OperatorIs_Node(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
 /]
 
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
 [query public OperatorIs_Function(arg0 : Operator) : Boolean
 	= invoke('org.eclipse.acceleo.model2nusmv.service.ModuleService', 'OperatorIs_Function(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
 /]
