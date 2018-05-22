@@ -129,7 +129,7 @@ public class VariablesService {
 	 * @param variable
 	 * @return
 	 */
-	public String Get_variable_type(Model model,Variable variable){
+	public static String Get_variable_type(Model model,Variable variable){
 		
 		try {
 			BasicType basicType = (BasicType)variable.getType();
@@ -174,5 +174,12 @@ public class VariablesService {
 		return "other type";
 	}
 
- 
+
+	public boolean VarIsInteger(Model model, Variable v){
+		if(Get_variable_type(model, v).equals("integer;"))
+			return true;
+		else 
+			return false;
+		
+	}
 }

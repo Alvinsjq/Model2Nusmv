@@ -21,3 +21,7 @@
 	= invoke('org.eclipse.acceleo.model2nusmv.service.EquationService', 'IsOutputVariables(java.lang.String, com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0, arg1})
 /]
 
+
+[query public Get_Assign_InFunction(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.EquationService', 'Get_Assign_InFunction(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]

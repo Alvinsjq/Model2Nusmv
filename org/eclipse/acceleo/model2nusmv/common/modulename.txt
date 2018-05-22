@@ -5,10 +5,10 @@
 [import org::eclipse::acceleo::model2nusmv::service::VariablesService]
 [import org::eclipse::acceleo::model2nusmv::common::IVar_block]
 [template public Module_name_block(model : Model, operator : Operator)]
-[if (OperatorIs_Function(operator))]
-MODULE [operator.name.toString()/][Get_Function_Input_params(operator)/]
+MODULE [operator.name.toString()/][if (OperatorIs_Function(operator))]
+[Get_Function_Input_params(operator)/]
 [elseif (OperatorIs_Node(operator))]
-MODULE main
+
 [IVar_block(model, operator)/]
 [/if]
 [/template]

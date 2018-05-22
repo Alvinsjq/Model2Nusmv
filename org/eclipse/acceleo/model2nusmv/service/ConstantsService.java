@@ -82,7 +82,13 @@ public class ConstantsService {
 	}
 
 
-
 	
+
+	public boolean IsInteger(String type){
+		if(type.equals("integer"))
+			return true;
+		else return false;
+		
+	}
 	
 }

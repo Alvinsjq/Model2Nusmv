@@ -2,15 +2,49 @@
 [module Assign_block('http:///smave.ecore')]
 [import org::eclipse::acceleo::model2nusmv::service::ModuleService]
 [import org::eclipse::acceleo::model2nusmv::service::VariablesService]
+[import org::eclipse::acceleo::model2nusmv::service::EquationService]
+[import org::eclipse::acceleo::model2nusmv::service::AssignService]
  
 [template public Assign_block(model : Model, operator : Operator)]
 ASSIGN
 	[if (OperatorIs_Function(operator))]
 		[comment 得到该function operator中的输出变量 /]
-		[for (output : Variable | Get_output_Variables(operator))]
-		[output.name.toString()/] := (在equations中寻找)/]
+		[for (assign : String | Get_Assign_InFunction(operator))]
+		NewPos := 
+					case 
+						(_L5 >= ClosedPosition & _L5 <= OpenPosition) : _L5;
+						(_L5 < ClosedPosition) : ClosedPosition;
+						(_L5 > OpenPosition) : OpenPosition;
+					esac;
 		[/for]
-			
-	
-	[/if]	
+	[elseif (OperatorIs_Node(operator))]
+		[for (s : String | Get_Node_Init(operator))]
+		[s/]
+		[/for]
+
+		next(LightColour) := 
+			case	
+			(LightColour = REDNoTrain) & (TrainInZone = TRUE) : REDTrain ;
+			(LightColour = REDNoTrain) & (TrainInZone = FALSE) : GREEN ;
+			(LightColour = REDTrain) & (TrainInZone = FALSE) : GREEN ;
+			(LightColour = GREEN) &((GatePosition>=OpenPosition) | (TrainInZone = TRUE)) : ORANGE ;		
+			(LightColour = GREEN) & (TrainInZone = TRUE) : REDTrain ;
+			(LightColour = ORANGE) & (TrainInZone = FALSE) : REDNoTrain ; 
+			TRUE : LightColour ;
+			esac ;
+
+		next(GatePosition) := 
+			case
+			(LightColour = REDNoTrain) & (TrainInZone = TRUE) &(GatePosition > ClosedPosition) :  close.NewPos ; 
+			(LightColour = REDNoTrain) & (TrainInZone = FALSE) & (GatePosition < OpenPosition) : open.NewPos ;
+			(LightColour = REDTrain) & (TrainInZone = TRUE)  & (GatePosition > ClosedPosition) : close.NewPos ;
+			(LightColour = REDTrain) & (TrainInZone = FALSE) & (GatePosition < OpenPosition) : open.NewPos ;
+			(LightColour = GREEN) & (GatePosition < OpenPosition) : open.NewPos ;
+			(LightColour = ORANGE) & (TrainInZone = TRUE) & (GatePosition > ClosedPosition) : close.NewPos ;
+			(LightColour = ORANGE) & (TrainInZone = FALSE)  : OpenPosition ;
+			TRUE : GatePosition ;
+
+			esac ;
+	[/if]
+		
 [/template]

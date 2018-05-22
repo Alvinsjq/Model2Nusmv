@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module AssignService('http:///smave.ecore')/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Get_Node_Init(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.AssignService', 'Get_Node_Init(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+

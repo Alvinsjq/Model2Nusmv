@@ -12,6 +12,6 @@
 [template public IVar_block(model : Model,operator : Operator)]
 IVAR
 	[for (input : Variable | Get_input_Variables(operator))]
-		[input.name.toString()/] := [Get_variable_type(model,input)/]
+		[input.name.toString()/] : [Get_variable_type(model,input)/]
 	[/for]
 [/template]

@@ -1,0 +1,22 @@
+[comment encoding = UTF-8 /]
+[module Assign_block('http:///smave.ecore')]
+[import org::eclipse::acceleo::model2nusmv::service::ModuleService]
+[import org::eclipse::acceleo::model2nusmv::service::VariablesService]
+[import org::eclipse::acceleo::model2nusmv::service::EquationService]
+[import org::eclipse::acceleo::model2nusmv::service::AssignService]
+ 
+[template public Assign_block(model : Model, operator : Operator)]
+ASSIGN
+	[if (OperatorIs_Function(operator))]
+		[comment 得到该function operator中的输出变量 /]
+		[for (assign : String | Get_Assign_InFunction(operator))]
+		[assign/]
+		[/for]
+	[elseif (OperatorIs_Node(operator))]
+		[for (s : String | Get_Node_Init(operator))]
+		[s/]
+		[/for]
+
+	[/if]
+		
+[/template]

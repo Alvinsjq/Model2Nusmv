@@ -61,3 +61,9 @@
 	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'Get_variable_type(com.formaltech.smave.metamodel.smave.Model, com.formaltech.smave.metamodel.smave.Variable)', Sequence{arg0, arg1})
 /]
 
+
+[query public VarIsInteger(arg0 : Model, arg1 : Variable) : Boolean
+	= invoke('org.eclipse.acceleo.model2nusmv.service.VariablesService', 'VarIsInteger(com.formaltech.smave.metamodel.smave.Model, com.formaltech.smave.metamodel.smave.Variable)',  Sequence{arg0, arg1})
+/]
+
+
