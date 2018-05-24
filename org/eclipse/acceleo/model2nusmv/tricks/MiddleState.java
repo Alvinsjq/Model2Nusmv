@@ -14,7 +14,7 @@ public class MiddleState {
 	public HashMap varmap;
 //	public HashMap targetState;//<condition,var1>
 //	public HashMap targetAction;//<condition,var2>
-	public ArrayList<HashMap> transitions;
+	public ArrayList<HashMap> transitions;  //这个list是按输出变量来排的，第一个元素是第一个输出变量中所包含的转移条件和目标状态
 	
 	public MiddleState(){
 		varmap = new HashMap<>();

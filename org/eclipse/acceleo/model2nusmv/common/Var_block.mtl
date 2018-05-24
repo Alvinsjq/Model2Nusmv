@@ -6,7 +6,6 @@
 [import org::eclipse::acceleo::model2nusmv::service::VariablesService]
 [import org::eclipse::acceleo::model2nusmv::service::CallExpression]
 [import org::eclipse::acceleo::model2nusmv::service::ModuleService]
-
 [**
  * The documentation of the template Var.
  * @param aModel
@@ -14,17 +13,13 @@
 [template public Var_block(model : Model,operator : Operator)]
 VAR
 	[for (output : Variable | Get_output_Variables(operator))]
-		[if (VarIsInteger(model,output))]
-		[output.name.toString()/] : ClosedPosition..OpenPosition;
-		[else]
 		[output.name.toString()/] : [Get_variable_type(model,output)/]
-		[/if]
 	[/for]
 [if (OperatorIs_Node(operator))]
-		open : OpenArmGate(GatePosition,ArmIncr);
-		close : CloseArmGate(ArmIncr,GatePosition);
+	[for (callfunction : String | Get_Call_Functions(operator))]
+		[callfunction/]
+	[/for]
 [/if]
-
 
 	
 [/template]

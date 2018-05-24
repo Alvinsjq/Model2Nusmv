@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.formaltech.smave.metamodel.smave.BinaryOp;
 import com.formaltech.smave.metamodel.smave.CallExpression;
+import com.formaltech.smave.metamodel.smave.ConstValue;
 import com.formaltech.smave.metamodel.smave.Equation;
 import com.formaltech.smave.metamodel.smave.Expression;
 import com.formaltech.smave.metamodel.smave.IdExpression;
@@ -240,7 +241,7 @@ public class EquationService {
 	private String GetUnaryOp(String operator){
 		switch (operator) {
 		case "not":
-			return " ! ";
+			return "!";
 		}
 		return "";
 		
@@ -374,14 +375,58 @@ public class EquationService {
 				
 		}else if(expression instanceof BinaryOp){
 			BinaryOp binaryOp = (BinaryOp)expression;
+			
 			if(binaryOp.getOperator().equals("times")){
 				// times不处理
-				return "";
+				EList<Expression> opreands = binaryOp.getOperand();
+				for(int i=0;i<opreands.size();i++){
+					Expression opex = opreands.get(i);
+					if(!(opex instanceof NAryOp)){
+						continue;
+					}else{
+						//这里处理NAryOp的部分
+						NAryOp nAryOp = (NAryOp)opex;
+						String op = NAryOp(nAryOp.getOperator());
+						String expression_in_naryop="";
+						EList<Expression> el = nAryOp.getOperand();
+						
+						for(int _i=0;_i<el.size();_i++){
+							if(el.get(_i)instanceof ConstValue){
+								ConstValue cv = (ConstValue)el.get(_i);
+								if(_i == 0)
+									expression_in_naryop += ReturnTF(cv.getValue());
+								else 
+									expression_in_naryop += " = " + ReturnTF(cv.getValue());
+							}else if(el.get(_i)instanceof IdExpression){
+								IdExpression cv = (IdExpression)el.get(_i);
+								if(_i == 0)
+									expression_in_naryop += cv.getPath().getName();
+								else 
+									expression_in_naryop += " = " + cv.getPath().getName();
+							}else{
+								
+							}
+						}
+						return expression_in_naryop;
+					}
+				}
 			}
+			
 			return "";
 		}else if(expression instanceof UnaryOp){
 			UnaryOp unaryOp = (UnaryOp)expression;
-			return GetUnaryOp(unaryOp.getOperator())+" "+unaryOp.getName();
+			EList<Expression> opreands = unaryOp.getOperand();
+			String opre = "";
+			for(int i=0;i<opreands.size();i++){
+				Expression opex = opreands.get(i);
+				if(opex instanceof IdExpression){
+					IdExpression idp = (IdExpression)opex;
+					opre += idp.getPath().getName();
+				}else{
+					//其他expression
+				}
+			}
+			return GetUnaryOp(unaryOp.getOperator())+"("+opre+")";
 		}else if(expression instanceof NAryOp){
 			
 		}else{
@@ -390,4 +435,23 @@ public class EquationService {
 		}
 		return "";
 	}
+	
+	
+	/**
+	 * 帮助
+	 * @param s
+	 * @return
+	 */
+	private String ReturnTF(String s){
+		if(s.equals("true"))
+			return "TRUE";
+		else if(s.equals("false"))
+				return "FALSE";
+		else 
+			return s;
+	}
+	
+	
+	
+	
 }

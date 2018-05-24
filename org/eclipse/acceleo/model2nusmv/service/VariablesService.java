@@ -154,7 +154,7 @@ public class VariablesService {
 			}
 		} catch (ClassCastException e) {
 			// TODO: handle exception
-			System.out.println("variable type isn't basic type");
+			//System.out.println("variable type isn't basic type");
 			NamedType namedType = (NamedType)variable.getType();			
 			String typename = namedType.getType().getName().toString();
 			StringBuffer typedetail = new StringBuffer();
@@ -175,8 +175,53 @@ public class VariablesService {
 	}
 
 
+public static String Get_variable_type(Variable variable){
+		
+		try {
+			BasicType basicType = (BasicType)variable.getType();
+			if(basicType.getBasicType().getName() == "BOOL"){
+				return "boolean;";
+			}
+			else if(basicType.getBasicType().getName() == "INT8")
+			{
+				return "integer;";
+			}
+			else if(basicType.getBasicType().getName() == "INT16")
+			{
+				return "integer;";
+			}
+			else if(basicType.getBasicType().getName() == "INT32")
+			{
+				return "integer;";
+			}
+			else if(basicType.getBasicType().getName() == "INT64")
+			{
+				return "integer;";
+			}
+		} catch (ClassCastException e) {
+			// TODO: handle exception
+			//System.out.println("variable type isn't basic type");
+			String declareOfType="{ ";
+			declareOfType += "};";
+			//return typename;
+			return declareOfType;
+		}
+		
+		return "other type";
+	}
+
+	
 	public boolean VarIsInteger(Model model, Variable v){
 		if(Get_variable_type(model, v).equals("integer;"))
+			return true;
+		else 
+			return false;
+		
+	}
+	
+	
+	public boolean VarIsInteger(Variable v){
+		if(Get_variable_type(v).equals("integer;"))
 			return true;
 		else 
 			return false;

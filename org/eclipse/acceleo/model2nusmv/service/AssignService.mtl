@@ -12,3 +12,7 @@
 	= invoke('org.eclipse.acceleo.model2nusmv.service.AssignService', 'Get_Node_Init(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
 /]
 
+[query public Get_Node_Next(arg0 : Operator) : Sequence(OclAny)
+	= invoke('org.eclipse.acceleo.model2nusmv.service.AssignService', 'Get_Node_Next(com.formaltech.smave.metamodel.smave.Operator)', Sequence{arg0})
+/]
+

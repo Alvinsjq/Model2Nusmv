@@ -79,32 +79,51 @@ public class StateServiece {
 				
 				HashMap vartrans = null;
 				
+				//首先确定输出变量的取值，如果是integer型则不放在该condition中
+				String condition_outputVar = "";
+				
+				for(int _i=0;_i<outputlist.size();_i++){
+					Variable v = outputlist.get(_i);
+					if(! new VariablesService().VarIsInteger(v)){
+						if(_i==0)
+							condition_outputVar = "("+v.getName()+" = "+mstate.getVarmap().get(v.getName())+")";
+						else
+							condition_outputVar = " & ("+v.getName()+" = "+mstate.getVarmap().get(v.getName())+")";
+					}
+						
+				}
+				//在确定输入变量的条件，在transition中拿到
 				for(Variable v : outputlist){
-					vartrans = new HashMap<>();
-					//确定condition,由此使的输出变量取值与转移条件确定
-					
-					String condition_outputVar = "("+v.getName()+" = "+mstate.getVarmap().get(v.getName())+")";
-					String condition_inputVar = "";
 					List<Transition> trans = state.getTransition();
+					vartrans = new HashMap<>();
 					for(int i=0;i<trans.size();i++){
+						String condition_inputVar = "";
 						Transition t = trans.get(i);
 						State targetstate = t.getTarget();
 						Expression condition = t.getCondition();	
 						String exp = new EquationService().Get_Expression(condition);
-						MiddleState targetmiddlestate = Find_MiddleState_with_StateName(targetstate.getName(), middlestates);
+						if(!exp.equals(""))
+							condition_inputVar += " & ("+exp+")";
+						String cond = condition_outputVar + condition_inputVar;
+						MiddleState targetmiddlestate = Find_MiddleState_with_StateName(targetstate.getName(), middlestates);					
 						String vartarget = targetmiddlestate.getVarmap().get(v.getName()).toString();
-						
-						condition_inputVar += "("+exp+")";
-						String cond = condition_outputVar +" & "+ condition_inputVar;
-						vartrans.put(cond, vartarget);
+						//确定condition,由此使的输出变量取值与转移条件确定
+						vartrans.put(cond, vartarget);//[(LightColour = RedNoTrain) & (TrainInZone = TRUE) , RedTrain]
 					}
+					//开始判断是否有漏掉自身的转移
+					if(vartrans.get(condition_outputVar) == null){
+						String selftarget = mstate.getVarmap().get(v.getName()).toString();
+						vartrans.put(condition_outputVar, selftarget);
+					}else{
+						String nexttarget = vartrans.get(condition_outputVar).toString();
+						vartrans.put(condition_outputVar, nexttarget);
+					}
+					transitions.add(vartrans);
 				}
-			
+				mstate.setTransitions(transitions);
+				MiddleStates.add(mstate);
 			}
-		
 		}
-		
-		
 		return MiddleStates;
 	}
 	
@@ -126,5 +145,7 @@ public class StateServiece {
 		
 		
 	}
+	
+	
 	
 }
